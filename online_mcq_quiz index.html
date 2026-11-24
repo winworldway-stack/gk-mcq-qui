@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>සාමාන්‍ය දැනුම හා කාලීන තොරතුරු - Online MCQ Quiz</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans Sinhala & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans Sinhala"', '"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#0f294a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans Sinhala', 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .fade-in {
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom Scrollbar for Question Navigator */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col selection:bg-blue-200 selection:text-blue-900">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-brand-900 text-white shadow-md sticky top-0 z-30">
+        <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600/30 border border-blue-400/30 p-2 rounded-xl">
+                    <svg class="w-6 h-6 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg leading-tight">සාමාන්‍ය දැනුම හා කාලීන තොරතුරු</h1>
+                    <p class="text-xs text-blue-200 hidden sm:block">අන්තර්ක්‍රියාකාරී බහුවරණ ප්‍රශ්නාවලිය (Online MCQ Quiz)</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Live Timer Badge (Shown during quiz if enabled) -->
+                <div id="header-timer" class="hidden items-center gap-1.5 bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-xl text-sm font-semibold text-amber-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span id="timer-display">00:00</span>
+                </div>
+                <!-- Home / Reset Button -->
+                <button id="btn-home-top" onclick="confirmReturnHome()" class="hidden text-xs sm:text-sm bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl transition font-medium">
+                    මුල් පිටුවට
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6 sm:py-8">
+
+        <!-- ==================== 1. START / DASHBOARD SCREEN ==================== -->
+        <section id="screen-start" class="fade-in max-w-3xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <!-- Banner -->
+                <div class="bg-gradient-to-r from-brand-900 via-blue-900 to-blue-800 p-6 sm:p-8 text-white">
+                    <span class="inline-block bg-blue-500/30 border border-blue-400/40 text-blue-100 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                        යාවත්කාලීන තොරතුරු ඇගයීම • ප්‍රශ්න 38
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold mb-2 leading-snug">
+                        සාමාන්‍ය දැනුම හා කාලීන තොරතුරු Online MCQ
+                    </h2>
+                    <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
+                        ශ්‍රී ලංකාවේ සමාජ-ආර්ථික දත්ත, භූගෝලීය තොරතුරු, ක්‍රීඩා සහ 2024–2025 ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම් ඇසුරින් සැකසූ සම්පූර්ණ බහුවරණ ප්‍රශ්නාවලිය.
+                    </p>
+                </div>
+
+                <!-- Configuration Options -->
+                <div class="p-6 sm:p-8 space-y-6">
+                    <!-- Category Selection -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-3">
+                            1. ප්‍රශ්න කාණ්ඩය (Category) තෝරන්න:
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="category-selector">
+                            <button type="button" data-cat="all" class="cat-btn active text-left p-4 rounded-xl border-2 border-blue-600 bg-blue-50/70 transition flex items-start justify-between">
+                                <div>
+                                    <div class="font-bold text-slate-900 text-sm sm:text-base">සම්පූර්ණ ප්‍රශ්න පත්‍රය</div>
+                                    <div class="text-xs text-slate-600 mt-0.5">සියලුම කොටස් ඇතුළත් වේ (ප්‍රශ්න 38)</div>
+                                </div>
+                                <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">38</span>
+                            </button>
+
+                            <button type="button" data-cat="1" class="cat-btn text-left p-4 rounded-xl border-2 border-slate-200 hover:border-blue-300 bg-white transition flex items-start justify-between">
+                                <div>
+                                    <div class="font-bold text-slate-900 text-sm sm:text-base">1 කොටස: ආර්ථිකය හා භූගෝලය</div>
+                                    <div class="text-xs text-slate-600 mt-0.5">මානව සංවර්ධනය, ක්‍රීඩා (ප්‍රශ්න 01–12)</div>
+                                </div>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-lg">12</span>
+                            </button>
+
+                            <button type="button" data-cat="2" class="cat-btn text-left p-4 rounded-xl border-2 border-slate-200 hover:border-blue-300 bg-white transition flex items-start justify-between">
+                                <div>
+                                    <div class="font-bold text-slate-900 text-sm sm:text-base">2 කොටස: කාලීන සිදුවීම්</div>
+                                    <div class="text-xs text-slate-600 mt-0.5">දේශීය හා ජාත්‍යන්තර (ප්‍රශ්න 13–24)</div>
+                                </div>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-lg">12</span>
+                            </button>
+
+                            <button type="button" data-cat="3" class="cat-btn text-left p-4 rounded-xl border-2 border-slate-200 hover:border-blue-300 bg-white transition flex items-start justify-between">
+                                <div>
+                                    <div class="font-bold text-slate-900 text-sm sm:text-base">3 කොටස: විද්‍යා හා සංඛ්‍යා දත්ත</div>
+                                    <div class="text-xs text-slate-600 mt-0.5">තවත් කාලීන තොරතුරු (ප්‍රශ්න 25–38)</div>
+                                </div>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-lg">14</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Settings Toggles -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+                        <label class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100/70 transition">
+                            <div>
+                                <div class="font-semibold text-sm text-slate-800">කාල ගණකය (Timer)</div>
+                                <div class="text-xs text-slate-500">ප්‍රශ්නාවලියට ගතවන කාලය මැනීම</div>
+                            </div>
+                            <input type="checkbox" id="toggle-timer" checked class="w-5 h-5 accent-blue-600 rounded cursor-pointer">
+                        </label>
+
+                        <label class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100/70 transition">
+                            <div>
+                                <div class="font-semibold text-sm text-slate-800">ප්‍රශ්න අනුපිළිවෙළ මිශ්‍ර කරන්න</div>
+                                <div class="text-xs text-slate-500">අහඹු අනුපිළිවෙළකට (Shuffle) ලබා දීම</div>
+                            </div>
+                            <input type="checkbox" id="toggle-shuffle" class="w-5 h-5 accent-blue-600 rounded cursor-pointer">
+                        </label>
+                    </div>
+
+                    <!-- Start Button -->
+                    <div class="pt-2">
+                        <button onclick="startQuiz()" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-base sm:text-lg py-4 px-6 rounded-xl shadow-lg shadow-blue-600/25 transition flex items-center justify-center gap-2">
+                            <span>ප්‍රශ්නාවලිය ආරම්භ කරන්න</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 2. ACTIVE QUIZ SCREEN ==================== -->
+        <section id="screen-quiz" class="hidden fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Left / Main Column: Question Card -->
+                <div class="lg:col-span-8 space-y-4">
+                    <!-- Top Progress Bar Card -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                        <div class="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-600 mb-2">
+                            <span id="progress-label">ප්‍රශ්නය 1 / 38</span>
+                            <span id="score-live-label" class="text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-lg">ලකුණු: 0</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-300" style="width: 2.6%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Question & Options Card -->
+                    <div class="bg-white p-5 sm:p-7 rounded-2xl shadow-sm border border-slate-200">
+                        <!-- Category Tag & Original Question No -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span id="q-category-badge" class="text-xs font-bold text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1 rounded-lg">
+                                1 කොටස: මානව සංවර්ධනය හා ආර්ථිකය
+                            </span>
+                            <span id="q-orig-num" class="text-xs font-medium text-slate-400">
+                                ප්‍රශ්න අංකය: #01
+                            </span>
+                        </div>
+
+                        <!-- Question Text -->
+                        <h3 id="question-text" class="text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6">
+                            ප්‍රශ්නය මෙහි දිස්වේ...
+                        </h3>
+
+                        <!-- Options List -->
+                        <div id="options-container" class="space-y-3">
+                            <!-- Options dynamically injected here -->
+                        </div>
+
+                        <!-- Instant Feedback / Explanation Box -->
+                        <div id="feedback-box" class="hidden mt-6 p-4 rounded-xl border text-sm leading-relaxed fade-in">
+                            <div class="flex items-start gap-3">
+                                <div id="feedback-icon" class="mt-0.5 shrink-0"></div>
+                                <div>
+                                    <div id="feedback-title" class="font-bold mb-1"></div>
+                                    <p id="feedback-explanation" class="text-slate-700"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="mt-7 pt-5 border-t border-slate-100 flex items-center justify-between gap-3">
+                            <button id="btn-prev" onclick="prevQuestion()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50 disabled:opacity-40 disabled:pointer-events-none transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                <span>පෙර ප්‍රශ්නය</span>
+                            </button>
+
+                            <button id="btn-finish-early" onclick="finishQuiz()" class="hidden sm:inline-flex px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition">
+                                ප්‍රතිඵල බලන්න
+                            </button>
+
+                            <button id="btn-next" onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-sm transition flex items-center gap-1.5">
+                                <span id="btn-next-text">ඊළඟ ප්‍රශ්නය</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Question Navigator Grid -->
+                <div class="lg:col-span-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 sticky top-20">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-slate-800 text-sm">ප්‍රශ්න පුවරුව (Navigator)</h4>
+                            <span id="answered-count-badge" class="text-xs font-semibold text-slate-500">0 / 38</span>
+                        </div>
+                        
+                        <!-- Legend -->
+                        <div class="flex flex-wrap gap-3 text-[11px] text-slate-600 mb-4 pb-3 border-b border-slate-100">
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> නිවැරදියි</span>
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span> වැරදියි</span>
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-200 inline-block"></span> පිළිතුරු නැත</span>
+                        </div>
+
+                        <!-- Number Buttons Grid -->
+                        <div id="navigator-grid" class="grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-6 gap-2 max-h-64 overflow-y-auto pr-1">
+                            <!-- Grid items injected via JS -->
+                        </div>
+
+                        <!-- Finish Quiz Action -->
+                        <button onclick="finishQuiz()" class="mt-5 w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>ප්‍රශ්නාවලිය අවසන් කරන්න</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 3. RESULTS & REVIEW SCREEN ==================== -->
+        <section id="screen-results" class="hidden fade-in max-w-4xl mx-auto space-y-6">
+            <!-- Score Summary Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-brand-900 to-blue-800 p-6 sm:p-8 text-white text-center">
+                    <div id="result-badge" class="inline-block bg-white/15 backdrop-blur-sm text-blue-100 text-xs font-bold px-3.5 py-1 rounded-full mb-3">
+                        ඇගයීම් ප්‍රතිඵල වාර්තාව
+                    </div>
+                    <h2 id="result-title" class="text-2xl sm:text-3xl font-extrabold mb-2">විශිෂ්ටයි!</h2>
+                    <p id="result-subtitle" class="text-blue-100 text-sm sm:text-base max-w-xl mx-auto">
+                        ඔබ සාමාන්‍ය දැනුම හා කාලීන තොරතුරු ප්‍රශ්නාවලිය සාර්ථකව අවසන් කර ඇත.
+                    </p>
+
+                    <!-- Circular / Highlight Stats -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6 max-w-2xl mx-auto">
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-3.5">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white" id="stat-score">0 / 38</div>
+                            <div class="text-xs text-blue-200 mt-1">මුළු ලකුණු</div>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-3.5">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-amber-300" id="stat-percent">0%</div>
+                            <div class="text-xs text-blue-200 mt-1">ප්‍රතිශතය</div>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-3.5">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-300" id="stat-correct">0</div>
+                            <div class="text-xs text-blue-200 mt-1">නිවැරදි පිළිතුරු</div>
+                        </div>
+                        <div class="bg-white/10 border border-white/15 rounded-xl p-3.5">
+                            <div class="text-2xl sm:text-3xl font-extrabold text-rose-300" id="stat-wrong">0</div>
+                            <div class="text-xs text-blue-200 mt-1">වැරදි / මඟහැරුණු</div>
+                        </div>
+                    </div>
+
+                    <div id="stat-time-wrapper" class="mt-4 text-xs text-blue-200">
+                        ගතවූ මුළු කාලය: <span id="stat-time" class="font-bold text-white">00:00</span>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown & Actions -->
+                <div class="p-6 sm:p-8 space-y-6">
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-base mb-3">කාණ්ඩ අනුව කාර්ය සාධනය (Category Breakdown)</h3>
+                        <div id="category-breakdown" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button onclick="restartSameQuiz()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-5 rounded-xl shadow-sm transition flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            <span>නැවත උත්සාහ කරන්න (Retry)</span>
+                        </button>
+                        <button onclick="goHome()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3.5 px-5 rounded-xl transition flex items-center justify-center gap-2">
+                            <span>වෙනත් කාණ්ඩයක් තෝරන්න</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Answer Review Section -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">සියලුම ප්‍රශ්න සහ නිවැරදි පිළිතුරු විවරණය</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">ඔබ ලබා දුන් පිළිතුරු සහ නිවැරදි පිළිතුරු පහතින් පරීක්ෂා කරන්න.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="filterReview('all')" id="rev-filter-all" class="rev-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-white">සියල්ල</button>
+                        <button onclick="filterReview('wrong')" id="rev-filter-wrong" class="rev-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">වැරදි පමණක්</button>
+                    </div>
+                </div>
+
+                <div id="review-list" class="space-y-4">
+                    <!-- Review cards injected via JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Modal Dialog (Replaces alert/confirm) -->
+    <div id="custom-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 fade-in">
+            <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-2">තහවුරු කරන්න</h3>
+            <p id="modal-message" class="text-sm text-slate-600 mb-6 leading-relaxed">ඔබට මෙම ප්‍රශ්නාවලියෙන් ඉවත් වී මුල් පිටුවට යාමට අවශ්‍යද?</p>
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50">නැත</button>
+                <button id="modal-confirm-btn" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm">ඔව්, ඉදිරියට යන්න</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-5 text-xs text-slate-400 border-t border-slate-200/70 bg-white mt-auto">
+        සාමාන්‍ය දැනුම හා කාලීන තොරතුරු ඇගයීම • ශ්‍රී ලංකාව සහ ජාත්‍යන්තර තොරතුරු සංග්‍රහය
+    </footer>
+
+    <script>
+        // Complete Dataset of all 38 Questions from the Document
+        const ALL_QUESTIONS = [
+            // ================= SECTION 1 (Q1 - Q12) =================
+            {
+                id: 1,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "2023 UNDP මානව සංවර්ධන වාර්තාවට අනුව, මානව සංවර්ධන දර්ශකයෙහි (HDI) ශ්‍රී ලංකාවේ අගය සහ හිමි ස්ථානය කුමක්ද?",
+                options: [
+                    "0.754 (92 වැනි ස්ථානය)",
+                    "0.776 (89 වැනි ස්ථානය)",
+                    "0.782 (78 වැනි ස්ථානය)",
+                    "0.768 (85 වැනි ස්ථානය)"
+                ],
+                correct: 1,
+                explanation: "UNDP මානව සංවර්ධන වාර්තාව (2023 දර්ශකය) අනුව ශ්‍රී ලංකාවේ අගය 0.776 වන අතර ලෝක ශ්‍රේණිගත කිරීම්වල 89 වැනි ස්ථානය හිමි වේ."
+            },
+            {
+                id: 2,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "ජනලේඛන හා සංඛ්‍යාලේඛන දෙපාර්තමේන්තුවේ දත්ත අනුව 2025 මුල් කාර්තුවේදී ශ්‍රී ලංකාවේ දරිද්‍රතා දර්ශකය (Poverty Headcount Index) කොපමණ ලෙස ඇස්තමේන්තු කර ඇත්ද?",
+                options: [
+                    "12.5%",
+                    "14.3%",
+                    "16.0%",
+                    "18.2%"
+                ],
+                correct: 2,
+                explanation: "ජනලේඛන හා සංඛ්‍යාලේඛන දෙපාර්තමේන්තුවේ දත්ත අනුව 2025 මුල් කාර්තුවේ දරිද්‍රතා දර්ශකය 16.0% ලෙස ඇස්තමේන්තු කර ඇත."
+            },
+            {
+                id: 3,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "2024 දත්ත අනුව ශ්‍රී ලංකාවේ දළ දේශීය නිෂ්පාදිතයට (GDP) 42.4% ක පමණ වැඩිම දායකත්වයක් සපයන පළාත කුමක්ද?",
+                options: [
+                    "මධ්‍යම පළාත",
+                    "දකුණු පළාත",
+                    "වයඹ පළාත",
+                    "බස්නාහිර පළාත"
+                ],
+                correct: 3,
+                explanation: "2024 දත්ත අනුව ශ්‍රී ලංකාවේ දළ දේශීය නිෂ්පාදිතයෙන් 42.4% ක පමණ වැඩිම දායකත්වයක් බස්නාහිර පළාතෙන් සැපයේ."
+            },
+            {
+                id: 4,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "2024 අගෝස්තු මස මිනින්දෝරු දෙපාර්තමේන්තුව මගින් ප්‍රකාශිත නව ගණනය කිරීම අනුව ශ්‍රී ලංකාවේ මුළු භූමි ප්‍රමාණය කොපමණද?",
+                options: [
+                    "වර්ග කිලෝමීටර 65,610",
+                    "වර්ග කිලෝමීටර 66,420",
+                    "වර්ග කිලෝමීටර 67,240",
+                    "වර්ග කිලෝමීටර 68,150"
+                ],
+                correct: 2,
+                explanation: "2024 අගෝස්තු මස මිනින්දෝරු දෙපාර්තමේන්තුවේ නව ගණනය කිරීම අනුව ශ්‍රී ලංකාවේ භූමි ප්‍රමාණය වර්ග කිලෝමීටර 67,240 කි (පැරණි සම්මතය වර්ග කි.මී. 65,610 විය)."
+            },
+            {
+                id: 5,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "ශ්‍රී ලංකාවේ කෘෂිකාර්මික ක්ෂේත්‍රයේ ප්‍රධාන ස්ථිර/වැවිලි භෝග වගා කරන ප්‍රමාණය (හෙක්ටයාර වලින්) නිවැරදිව දැක්වෙන පිළිතුර තෝරන්න.",
+                options: [
+                    "පොල් 295,552 / තේ 229,262 / රබර් 207,628",
+                    "තේ 295,552 / පොල් 229,262 / රබර් 207,628",
+                    "පොල් 229,262 / තේ 207,628 / රබර් 295,552",
+                    "රබර් 295,552 / තේ 229,262 / පොල් 207,628"
+                ],
+                correct: 0,
+                explanation: "ප්‍රධාන ස්ථිර/වැවිලි භෝග වගා ප්‍රමාණයන් වන්නේ පොල් හෙක්ටයාර 295,552 පමණ, තේ හෙක්ටයාර 229,262 පමණ සහ රබර් හෙක්ටයාර 207,628 පමණ වේ."
+            },
+            {
+                id: 6,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "ශ්‍රී ලංකාවේ පවතින ප්‍රධාන කාලගුණ විද්‍යා නිරීක්ෂණ මධ්‍යස්ථාන සංඛ්‍යාව කීයද?",
+                options: [
+                    "18 කි",
+                    "20 කි",
+                    "22 කි",
+                    "25 කි"
+                ],
+                correct: 2,
+                explanation: "ශ්‍රී ලංකාව තුළ ප්‍රධාන කාලගුණ විද්‍යා නිරීක්ෂණ මධ්‍යස්ථාන 22 ක් පිහිටා ඇත."
+            },
+            {
+                id: 7,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "වයස අවුරුදු 10 දී, වයස අවුරුදු 11 න් පහළ බාලක මේස පන්දු ලෝක ශ්‍රේණිගත කිරීම්වල අංක 1 ස්ථානයට පැමිණි ලාබාලතම ශ්‍රී ලාංකික ක්‍රීඩකයා කවුද?",
+                options: [
+                    "තාවි සමරවීර",
+                    "සෙනුර සිල්වා",
+                    "චමීර ගිනිගේ",
+                    "උදය රණසිංහ"
+                ],
+                correct: 0,
+                explanation: "තාවි සමරවීර වයස අවුරුදු 10 දී වයස අවුරුදු 11 න් පහළ බාලක මේස පන්දු ලෝක ශ්‍රේණිගත කිරීම්වල අංක 1 ස්ථානයට පත් විය."
+            },
+            {
+                id: 8,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "19 න් පහළ කාන්තා විස්සයි20 ලෝක කුසලාන තරගාවලියේදී ශ්‍රී ලංකා කණ්ඩායමේ නායිකාව ලෙස කටයුතු කළ ක්‍රීඩිකාව කවුද?",
+                options: [
+                    "රශ්මිකා සෙව්වන්දි",
+                    "මනුදි නානායක්කාර",
+                    "විමෝක්ෂා බාලසූරිය",
+                    "දහමි සනෙත්මා"
+                ],
+                correct: 1,
+                explanation: "19 න් පහළ කාන්තා විස්සයි20 ලෝක කුසලාන තරගාවලියේ ශ්‍රී ලංකා කණ්ඩායමේ නායිකාව වූයේ මනුදි නානායක්කාරයි."
+            },
+            {
+                id: 9,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "ශ්‍රී ලංකාවේ රාජ්‍ය සේවා සහ දඩ ගෙවීම් සඳහා හඳුන්වා දුන් රජයේ ඩිජිටල් ගෙවීම් වේදිකාව කුමක්ද?",
+                options: [
+                    "LankaPay",
+                    "e-SL Pay",
+                    "GovPay",
+                    "StatePay"
+                ],
+                correct: 2,
+                explanation: "රාජ්‍ය සේවා සහ දඩ ගෙවීම් සඳහා හඳුන්වා දුන් රජයේ ඩිජිටල් ගෙවීම් වේදිකාව 'GovPay' වේ."
+            },
+            {
+                id: 10,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "තේ දෙපාර්තමේන්තුවේ හිටපු ප්‍රධානියෙකු සහ ජෝන් කීල්ස් හෝල්ඩිංග්ස් (John Keells Holdings) හි පළමු ශ්‍රී ලාංකික සභාපතිවරයා වූ අභාවප්‍රාප්ත ව්‍යාපාරිකයා කවුද?",
+                options: [
+                    "කෙන් බාලේන්ද්‍ර (Ken Balendra)",
+                    "හැරී ජයවර්ධන (Harry Jayawardena)",
+                    "ලලිත් කොතලාවල (Lalith Kotelawala)",
+                    "දේශමාන්‍ය එන්. යූ. ජයවර්ධන"
+                ],
+                correct: 0,
+                explanation: "තේ දෙපාර්තමේන්තුවේ හිටපු ප්‍රධානියෙකු සහ ජෝන් කීල්ස් හෝල්ඩිංග්ස් හි පළමු ශ්‍රී ලාංකික සභාපතිවරයා වූයේ අභාවප්‍රාප්ත කෙන් බාලේන්ද්‍ර මහතායි."
+            },
+            {
+                id: 11,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "19 න් පහළ කාන්තා ලෝක කුසලාන ක්‍රිකට් ඉතිහාසයේ පළමු ශතකය (නොදැවී ලකුණු 110) රැස් කළ ඉන්දීය ක්‍රීඩිකාව කවුද?",
+                options: [
+                    "ෂෆාලි වර්මා (Shafali Verma)",
+                    "ගොංගඩි ත්‍රිෂා (Gongadi Trisha)",
+                    "රිචා ගෝෂ් (Richa Ghosh)",
+                    "ශ්වේතා සෙහ්රාවත් (Shweta Sehrawat)"
+                ],
+                correct: 1,
+                explanation: "ඉන්දියාවේ ගොංගඩි ත්‍රිෂා (Gongadi Trisha) නොදැවී ලකුණු 110 ක් රැස් කරමින් 19 න් පහළ කාන්තා ලෝක කුසලාන ඉතිහාසයේ පළමු ශතකය වාර්තා කළාය."
+            },
+            {
+                id: 12,
+                category: 1,
+                categoryName: "1 කොටස: මානව සංවර්ධනය, ආර්ථිකය හා භූගෝලීය තොරතුරු",
+                question: "ICC 2024 සම්මාන උළෙලේ 'වසරේ නැගී එන පිරිමි ක්‍රිකට් ක්‍රීඩකයා' සම්මානය දිනාගත් ශ්‍රී ලාංකික ක්‍රීඩකයා කවුද?",
+                options: [
+                    "පැතුම් නිස්සංක",
+                    "වනිඳු හසරංග",
+                    "මතීෂ පතිරණ",
+                    "කමිඳු මෙන්ඩිස්"
+                ],
+                correct: 3,
+                explanation: "ICC 2024 සම්මාන උළෙලේ වසරේ නැගී එන පිරිමි ක්‍රිකට් ක්‍රීඩකයා සම්මානය ශ්‍රී ලංකාවේ කමිඳු මෙන්ඩිස් විසින් දිනා ගන්නා ලදී."
+            },
+
+            // ================= SECTION 2 (Q13 - Q24) =================
+            {
+                id: 13,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "2024 නත්තල් වෙළඳපොළ වෙත රථයක් පැදවීමේ ප්‍රහාරය එල්ල වූ ජර්මානු නගරය කුමක්ද?",
+                options: [
+                    "මැග්ඩබර්ග් (Magdeburg)",
+                    "මියුනිච් (Munich)",
+                    "හැම්බර්ග් (Hamburg)",
+                    "ෆ්‍රෑන්ක්ෆර්ට් (Frankfurt)"
+                ],
+                correct: 0,
+                explanation: "2024 නත්තල් වෙළඳපොළ වෙත රථයක් පැදවීමේ ප්‍රහාරය ජර්මනියේ මැග්ඩබර්ග් (Magdeburg) නගරයේදී සිදු විය."
+            },
+            {
+                id: 14,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "21 වැනි සියවසේ මාරාන්තිකම ගුවන් යානා අනතුර (MH17 - මරණ 298) සිදු වූ රට කුමක්ද?",
+                options: [
+                    "ඉරානය",
+                    "ඇල්ජීරියාව",
+                    "යුක්රේනය",
+                    "ඇමරිකා එක්සත් ජනපදය"
+                ],
+                correct: 2,
+                explanation: "21 වැනි සියවසේ මාරාන්තිකම ගුවන් යානා අනතුරු අතර ප්‍රමුඛ වන්නේ යුක්රේනයයි (MH17 - මරණ 298). ඉන්පසු ඉරානය (275), ඇමරිකා එක්සත් ජනපදය (265) සහ ඇල්ජීරියාව (257) වේ."
+            },
+            {
+                id: 15,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "2025 ජනවාරි 1 වැනිදා ඇමරිකා එක්සත් ජනපදයේ (Bourbon Street හි) ත්‍රස්ත ප්‍රහාරයක් එල්ල වූ නගරය කුමක්ද?",
+                options: [
+                    "නිව් යෝර්ක් (New York)",
+                    "නිව් ඔර්ලියන්ස් (New Orleans)",
+                    "චිකාගෝ (Chicago)",
+                    "ලාස් වේගාස් (Las Vegas)"
+                ],
+                correct: 1,
+                explanation: "2025 ජනවාරි 1 වැනිදා ඇමරිකා එක්සත් ජනපදයේ නිව් ඔර්ලියන්ස් (New Orleans - Bourbon Street) නගරයට ත්‍රස්ත ප්‍රහාරයක් එල්ල විය."
+            },
+            {
+                id: 16,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "ශ්‍රී ලංකාවේ මන්නාරම් සුළං බලාගාර ව්‍යාපෘතියෙන් ඉවත් වූ ඉන්දියානු සමාගම කුමක්ද?",
+                options: [
+                    "Tata Power",
+                    "Reliance Power",
+                    "Adani Green Energy",
+                    "Suzlon Energy"
+                ],
+                correct: 2,
+                explanation: "මන්නාරම් සුළං බලාගාර ව්‍යාපෘතියෙන් ඉවත් වූ ඉන්දියානු සමාගම වන්නේ Adani Green Energy සමාගමයි."
+            },
+            {
+                id: 17,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "2025 දී පාර්ලිමේන්තු රජයේ ගිණුම් කාරක සභාවේ (COPE) සභාපතිවරයා ලෙස පත් වූයේ කවුද?",
+                options: [
+                    "වෛද්‍ය නිශාන්ත සමරවීර",
+                    "කබීර් හෂීම්",
+                    "මහාචාර්ය චරිත හේරත්",
+                    "රෝහිත අබේගුණවර්ධන"
+                ],
+                correct: 0,
+                explanation: "2025 දී පාර්ලිමේන්තු මන්ත්‍රී වෛද්‍ය නිශාන්ත සමරවීර මහතා COPE කමිටුවේ සභාපතිවරයා ලෙස පත් විය."
+            },
+            {
+                id: 18,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "2025 දී සංක්‍රමණිකයන් විශාල පිරිසකගේ නීත්‍යානුකූල තත්ත්වය අවලංගු කිරීමට පියවර ගත් රට කුමක්ද?",
+                options: [
+                    "එක්සත් රාජධානිය",
+                    "කැනඩාව",
+                    "ඕස්ට්‍රේලියාව",
+                    "ඇමරිකා එක්සත් ජනපදය"
+                ],
+                correct: 3,
+                explanation: "2025 දී සංක්‍රමණිකයන් විශාල පිරිසකගේ නීත්‍යානුකූල තත්ත්වය අවලංගු කිරීමට ඇමරිකා එක්සත් ජනපදය පියවර ගත්තේය."
+            },
+            {
+                id: 19,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "දකුණු කොරියාවේ අපරාධ නඩු විභාගයකට මුහුණ දුන් ජනාධිපතිවරයා කවුද?",
+                options: [
+                    "මූන් ජේ-ඉන් (Moon Jae-in)",
+                    "යූන් සුක් යෙඕල් (Yoon Suk Yeol)",
+                    "ලී ජේ-මියුන්ග් (Lee Jae-myung)",
+                    "හන් ඩක්-සූ (Han Duck-soo)"
+                ],
+                correct: 1,
+                explanation: "දකුණු කොරියාවේ අපරාධ නඩු විභාගයකට මුහුණ දුන් ජනාධිපතිවරයා වන්නේ යූන් සුක් යෙඕල් (Yoon Suk Yeol) ය."
+            },
+            {
+                id: 20,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "2025 මාර්තු 29 වැනිදා ශ්‍රී ලංකාවේ නැවත විවෘත කළ ප්‍රධාන ලුණු කර්මාන්තශාලාව කුමක්ද?",
+                options: [
+                    "පලටුපාන ලුණු කර්මාන්තශාලාව",
+                    "පුත්තලම ලුණු කර්මාන්තශාලාව",
+                    "ආනයිඉරව් (අලිමංකඩ) ලුණු කර්මාන්තශාලාව",
+                    "බූන්දල ලුණු කර්මාන්තශාලාව"
+                ],
+                correct: 2,
+                explanation: "2025 මාර්තු 29 වැනිදා නැවත විවෘත කරන ලද්දේ ආනයිඉරව් ලුණු කර්මාන්තශාලාවයි (Aanaiyiravu Salt Factory)."
+            },
+            {
+                id: 21,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "වසර 35 කට පසු 2025 මාර්තු මාසයේදී නැවත ආරම්භ කළ උළු කර්මාන්තශාලාව කුමක්ද?",
+                options: [
+                    "ඔඩුසුඩාන් උළු කර්මාන්තශාලාව",
+                    "වයික්කාල උළු කර්මාන්තශාලාව",
+                    "අම්පාර උළු කර්මාන්තශාලාව",
+                    "බංගදෙණිය උළු කර්මාන්තශාලාව"
+                ],
+                correct: 0,
+                explanation: "වසර 35 කට පසු 2025 මාර්තු මාසයේදී ඔඩුසුඩාන් උළු කර්මාන්තශාලාව (Oddusuddan Tile Factory) නැවත ආරම්භ කෙරිණි."
+            },
+            {
+                id: 22,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "දකුණු ආසියාවේ දිගම වාරි උමං මාර්ගය ලෙස කැණීම් අවසන් වූ, කි.මී. 27.7 ක දිගින් යුත් ව්‍යාපෘතිය කුමක්ද?",
+                options: [
+                    "උමා ඔය වාරි උමං මාර්ගය",
+                    "උතුරු මැද පළාත් ප්‍රධාන ඇළ වාරි උමං මාර්ගය",
+                    "මොරගහකන්ද - කළුගඟ උමං මාර්ගය",
+                    "වයඹ පළාත් ඇළ වාරි උමං මාර්ගය"
+                ],
+                correct: 1,
+                explanation: "කි.මී. 27.7 ක දිගින් යුත් උතුරු මැද පළාත් ප්‍රධාන ඇළ වාරි උමං මාර්ගය දකුණු ආසියාවේ දිගම වාරි උමං මාර්ගය ලෙස කැණීම් අවසන් විය."
+            },
+            {
+                id: 23,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "2025 දී බැරල් බිලියන 303 කට අධික සංචිතයක් සහිතව ලෝකයේ වැඩිම ඔප්පු කරන ලද බොරතෙල් සංචිත හිමි රට කුමක්ද?",
+                options: [
+                    "සෞදි අරාබිය",
+                    "ඉරානය",
+                    "කැනඩාව",
+                    "වෙනිසියුලාව"
+                ],
+                correct: 3,
+                explanation: "2025 දී බැරල් බිලියන 303 කට අධික සංචිතයක් සහිතව ලෝකයේ වැඩිම ඔප්පු කරන ලද බොරතෙල් සංචිත හිමි රට වෙනිසියුලාවයි."
+            },
+            {
+                id: 24,
+                category: 2,
+                categoryName: "2 කොටස: ජාත්‍යන්තර හා දේශීය කාලීන සිදුවීම්",
+                question: "2025 මැයි 8 වැනිදා රොබට් ප්‍රිවෝස්ට් (Robert Prevost) පාප් වහන්සේ ලෙස තේරී පත් වූ පසු හැඳින්වූ නාමය කුමක්ද?",
+                options: [
+                    "II වැනි ෆ්‍රැන්සිස් පාප් වහන්සේ",
+                    "XVII වැනි බෙනඩික්ට් පාප් වහන්සේ",
+                    "XIV වැනි ලියෝ පාප් වහන්සේ",
+                    "XXIV වැනි ජෝන් පාප් වහන්සේ"
+                ],
+                correct: 2,
+                explanation: "2025 මැයි 8 වැනිදා පාප් වහන්සේ ලෙස තේරී පත් වූ රොබට් ප්‍රිවෝස්ට් හිමිපාණන් XIV වැනි ලියෝ පාප් වහන්සේ (Pope Leo XIV) ලෙස හැඳින්විණි."
+            },
+
+            // ================= SECTION 3 (Q25 - Q38) =================
+            {
+                id: 25,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "ශ්‍රී ලංකාව නොමිලේ සංචාරක වීසා (ETA) සහන ලබා දීමට පුළුල් කළ රටවල් සංඛ්‍යාව කීයද?",
+                options: [
+                    "රටවල් 35 ක්",
+                    "රටවල් 40 ක්",
+                    "රටවල් 45 ක්",
+                    "රටවල් 50 ක්"
+                ],
+                correct: 1,
+                explanation: "ශ්‍රී ලංකාව රටවල් 40 ක් සඳහා නොමිලේ සංචාරක වීසා (ETA) පහසුකම පුළුල් කරන ලදී."
+            },
+            {
+                id: 26,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "2025 දී ව්‍යවස්ථාදායක සභාවේ ලේකම් ධුරයෙන් ඉල්ලා අස් වූ පාර්ලිමේන්තුවේ හිටපු මහලේකම්වරයා කවුද?",
+                options: [
+                    "කුෂානි රෝහණධීර",
+                    "ධම්මික දසනායක",
+                    "ධම්මික කිතුල්ගොඩ",
+                    "නිහාල් සෙනෙවිරත්න"
+                ],
+                correct: 1,
+                explanation: "2025 දී ව්‍යවස්ථාදායක සභාවේ ලේකම් ධුරයෙන් ඉල්ලා අස් වූයේ පාර්ලිමේන්තුවේ හිටපු මහලේකම් ධම්මික දසනායක මහතායි."
+            },
+            {
+                id: 27,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "බංග්ලාදේශයේ අන්තර්වාර රජයේ ප්‍රධාන උපදේශක ලෙස පත් වූ නොබෙල් ත්‍යාගලාභියා කවුද?",
+                options: [
+                    "අමර්ත්‍යා සෙන්",
+                    "මුහම්මද් යුනුස් (Muhammad Yunus)",
+                    "කයිලාෂ් සත්‍යාර්ථි",
+                    "අභිජිත් බැනර්ජි"
+                ],
+                correct: 1,
+                explanation: "බංග්ලාදේශයේ අන්තර්වාර රජයේ ප්‍රධාන උපදේශක ලෙස පත් වූ නොබෙල් ත්‍යාගලාභියා මුහම්මද් යුනුස් (Muhammad Yunus) මහතායි."
+            },
+            {
+                id: 28,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "අල්-ෂබාබ් (Al-Shabaab) සන්නද්ධ කණ්ඩායම ප්‍රධාන වශයෙන් ක්‍රියාත්මක වන රට කුමක්ද?",
+                options: [
+                    "සුඩානය",
+                    "යේමනය",
+                    "නයිජීරියාව",
+                    "සෝමාලියාව"
+                ],
+                correct: 3,
+                explanation: "අල්-ෂබාබ් (Al-Shabaab) සන්නද්ධ කණ්ඩායම ප්‍රධාන වශයෙන් සෝමාලියාව තුළ ක්‍රියාත්මක වේ."
+            },
+            {
+                id: 29,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "2025 ජාත්‍යන්තර බුකර් සම්මානය දිනාගත් 'Heart Lamp' කන්නඩ භාෂා කෙටිකතා සංග්‍රහයේ රචිකාවිය කවුද?",
+                options: [
+                    "දීපා භාස්ති (Deepa Bhasthi)",
+                    "බානු මුෂ්තාක් (Banu Mushtaq)",
+                    "ගීතාංජලී ශ්‍රී (Geetanjali Shree)",
+                    "අරුන්දතී රෝයි (Arundhati Roy)"
+                ],
+                correct: 1,
+                explanation: "2025 ජාත්‍යන්තර බුකර් සම්මානය දිනාගත් 'Heart Lamp' කෘතියේ රචිකාවිය බානු මුෂ්තාක් (Banu Mushtaq) වන අතර එහි ඉංග්‍රීසි පරිවර්තනය දීපා භාස්ති විසින් සිදු කරන ලදී."
+            },
+            {
+                id: 30,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "1972 දී සිකුරු ග්‍රහයා වෙත යැවූ සෝවියට් අභ්‍යවකාශ යානයක් වන 'කොස්මොස් 482' (Kosmos 482) පෘථිවියට කඩා වැටුණේ කවදාද?",
+                options: [
+                    "2025 මැයි 10 වැනිදා",
+                    "2025 මාර්තු 29 වැනිදා",
+                    "2025 අප්‍රේල් 15 වැනිදා",
+                    "2025 ජූනි 05 වැනිදා"
+                ],
+                correct: 0,
+                explanation: "1972 දී සිකුරු ග්‍රහයා වෙත යැවූ සෝවියට් අභ්‍යවකාශ යානයක් වන 'කොස්මොස් 482' 2025 මැයි 10 වැනිදා පෘථිවියට කඩා වැටුණි."
+            },
+            {
+                id: 31,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "2025 මැයි මාසයේ PSLV-C61 රොකට් දෝෂයක් හේතුවෙන් අහිමි වූ ඉන්දියානු පෘථිවි නිරීක්ෂණ චන්ද්‍රිකාව කුමක්ද?",
+                options: [
+                    "EOS-07",
+                    "EOS-08",
+                    "EOS-09",
+                    "RISAT-2B"
+                ],
+                correct: 2,
+                explanation: "2025 මැයි මාසයේ PSLV-C61 මෙහෙයුමේ රොකට් දෝෂයක් හේතුවෙන් අහිමි වූ ඉන්දියානු පෘථිවි නිරීක්ෂණ චන්ද්‍රිකාව EOS-09 වේ."
+            },
+            {
+                id: 32,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "ග්‍රහක සාම්පල රැගෙන ඒම සඳහා 2025 මැයි මාසයේදී චීනය දියත් කළ අභ්‍යවකාශ මෙහෙයුම කුමක්ද?",
+                options: [
+                    "චැන්ග්-ඊ 6 (Chang'e-6)",
+                    "ටියැන්වෙන්-1 (Tianwen-1)",
+                    "ටියැන්වෙන්-2 (Tianwen-2)",
+                    "ෂෙන්ෂෝ-19 (Shenzhou-19)"
+                ],
+                correct: 2,
+                explanation: "ග්‍රහක සාම්පල රැගෙන ඒම සඳහා 2025 මැයි මාසයේදී චීනය දියත් කළ අභ්‍යවකාශ මෙහෙයුම ටියැන්වෙන්-2 (Tianwen-2) වේ."
+            },
+            {
+                id: 33,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "සුළු වාරිමාර්ග සංවර්ධනය සඳහා ශ්‍රී ලංකාවේ ක්‍රියාත්මක කරනු ලබන වැඩසටහන කුමක්ද?",
+                options: [
+                    "එල්ලංගා ප්‍රතිසංස්කරණ වැඩසටහන",
+                    "වැව් මහිමය – අපේ උරුමය",
+                    "වාරි සෞභාග්‍යා ව්‍යාපෘතිය",
+                    "ගමට වැවක් වැඩසටහන"
+                ],
+                correct: 1,
+                explanation: "සුළු වාරිමාර්ග සංවර්ධනය සඳහා ශ්‍රී ලංකාවේ ක්‍රියාත්මක වැඩසටහන 'වැව් මහිමය – අපේ උරුමය' (Wari Mahimaya - Ape Urumaya) වේ."
+            },
+            {
+                id: 34,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "ශ්‍රී ලංකාවේ වයස් යැපුම් අනුපාතිකය (Age Dependency Ratio) ආසන්න වශයෙන් කොපමණද?",
+                options: [
+                    "41.2% – 42.5%",
+                    "51.8% – 51.9% (ජනලේඛන දත්ත අනුව 49.5% පමණ)",
+                    "60.4% – 61.0%",
+                    "35.0% – 36.8%"
+                ],
+                correct: 1,
+                explanation: "ශ්‍රී ලංකාවේ වයස් යැපුම් අනුපාතිකය ආසන්න වශයෙන් 51.8% – 51.9% ක් වේ (ජනලේඛන හා සංඛ්‍යාලේඛන දෙපාර්තමේන්තු දත්ත අනුව 49.5% පමණ)."
+            },
+            {
+                id: 35,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "ශ්‍රී ලංකාවේ දුම්රිය ස්ථාන 100 ක් නවීකරණය කිරීම සඳහා ක්‍රියාත්මක වැඩසටහන කුමක්ද?",
+                options: [
+                    "Smart Station Sri Lanka",
+                    "Green Rail Lanka",
+                    "Dream Destination (සිහින ගමනාන්තය)",
+                    "Heritage Rail 100"
+                ],
+                correct: 2,
+                explanation: "ශ්‍රී ලංකාවේ දුම්රිය ස්ථාන 100 ක් නවීකරණය කිරීමේ වැඩසටහන 'Dream Destination' (සිහින ගමනාන්තය) ලෙස හැඳින්වේ."
+            },
+            {
+                id: 36,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "2025 දී අවධානයට ලක් වූ රුසියානු පිළිකා එන්නත් පර්යේෂණ වැඩසටහනේ නම කුමක්ද?",
+                options: [
+                    "ස්පුට්නික්-V (Sputnik-V)",
+                    "එන්ටරොමික්ස් (Enteromix)",
+                    "ඔන්කොවැක්ස් (OncoVax)",
+                    "එපිවැක් (EpiVac)"
+                ],
+                correct: 1,
+                explanation: "2025 දී අවධානයට ලක් වූ රුසියානු පිළිකා එන්නත් පර්යේෂණ වැඩසටහනේ නම එන්ටරොමික්ස් (Enteromix) වේ."
+            },
+            {
+                id: 37,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "සියඹලාණ්ඩුවේ ඉදි කෙරෙන මෙගාවොට් 100 ක ධාරිතාවයකින් යුත් ශ්‍රී ලංකාවේ විශාලතම සූර්ය බල උද්‍යාන ව්‍යාපෘතිය කුමක්ද?",
+                options: [
+                    "සූර්යබල සංග්‍රාමය උද්‍යානය",
+                    "හිරු එළිය බලශක්ති උද්‍යානය",
+                    "රිවිදනවි (Rividanavi) සූර්ය බල උද්‍යානය",
+                    "පුනරීන් සූර්ය බල උද්‍යානය"
+                ],
+                correct: 2,
+                explanation: "සියඹලාණ්ඩුවේ ඉදි කෙරෙන මෙගාවොට් 100 ක ශ්‍රී ලංකාවේ විශාලතම සූර්ය බල උද්‍යාන ව්‍යාපෘතිය 'රිවිදනවි' (Rividanavi) සූර්ය බල උද්‍යානයයි."
+            },
+            {
+                id: 38,
+                category: 3,
+                categoryName: "3 කොටස: තවත් කාලීන, විද්‍යා හා සංඛ්‍යාත්මක තොරතුරු",
+                question: "2025 දී ඊශ්‍රායලය සහ ඉරානය අතර ඇති වූ ගැටුම්වලදී ඊශ්‍රායල මෙහෙයුම සහ ඉරාන ප්‍රතිචාරය හැඳින්වූ සංකේත නාම පිළිවෙළින් මොනවාද?",
+                options: [
+                    "Operation Rising Lion සහ Operation True Promise III",
+                    "Operation Iron Swords සහ Operation Midnight Hammer",
+                    "Operation True Promise III සහ Operation Rising Lion",
+                    "Operation Midnight Hammer සහ Operation Rising Lion"
+                ],
+                correct: 0,
+                explanation: "2025 ඊශ්‍රායල-ඉරාන ගැටුම්වලදී ඊශ්‍රායල මෙහෙයුම 'Operation Rising Lion' ලෙසද, ඉරාන ප්‍රතිචාරය 'Operation True Promise III' ලෙසද හැඳින්විණි (ඇමරිකානු ප්‍රහාරය 'Operation Midnight Hammer')."
+            }
+        ];
+
+        // App State
+        let state = {
+            selectedCategory: 'all',
+            useTimer: true,
+            shuffleQuestions: false,
+            activeQuestions: [],
+            currentIndex: 0,
+            userAnswers: {}, // { questionId: selectedOptionIndex }
+            timerInterval: null,
+            secondsElapsed: 0
+        };
+
+        // Category Selector UI Setup
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.cat-btn').forEach(b => {
+                    b.classList.remove('active', 'border-blue-600', 'bg-blue-50/70');
+                    b.classList.add('border-slate-200', 'bg-white');
+                    b.querySelector('span').classList.remove('bg-blue-600', 'text-white');
+                    b.querySelector('span').classList.add('bg-slate-100', 'text-slate-700');
+                });
+                btn.classList.add('active', 'border-blue-600', 'bg-blue-50/70');
+                btn.classList.remove('border-slate-200', 'bg-white');
+                btn.querySelector('span').classList.add('bg-blue-600', 'text-white');
+                btn.querySelector('span').classList.remove('bg-slate-100', 'text-slate-700');
+                
+                state.selectedCategory = btn.getAttribute('data-cat');
+            });
+        });
+
+        // Start Quiz
+        function startQuiz() {
+            state.useTimer = document.getElementById('toggle-timer').checked;
+            state.shuffleQuestions = document.getElementById('toggle-shuffle').checked;
+
+            // Filter questions by category
+            let filtered = state.selectedCategory === 'all'
+                ? [...ALL_QUESTIONS]
+                : ALL_QUESTIONS.filter(q => String(q.category) === state.selectedCategory);
+
+            // Shuffle if enabled
+            if (state.shuffleQuestions) {
+                for (let i = filtered.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+                }
+            }
+
+            state.activeQuestions = filtered;
+            state.currentIndex = 0;
+            state.userAnswers = {};
+            state.secondsElapsed = 0;
+
+            // Switch Screens
+            showScreen('screen-quiz');
+            document.getElementById('btn-home-top').classList.remove('hidden');
+
+            // Setup Timer
+            clearInterval(state.timerInterval);
+            const timerEl = document.getElementById('header-timer');
+            if (state.useTimer) {
+                timerEl.classList.remove('hidden');
+                timerEl.classList.add('flex');
+                updateTimerDisplay();
+                state.timerInterval = setInterval(() => {
+                    state.secondsElapsed++;
+                    updateTimerDisplay();
+                }, 1000);
+            } else {
+                timerEl.classList.add('hidden');
+                timerEl.classList.remove('flex');
+            }
+
+            renderNavigator();
+            renderQuestion();
+        }
+
+        function formatTime(secs) {
+            const m = Math.floor(secs / 60).toString().padStart(2, '0');
+            const s = (secs % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        }
+
+        function updateTimerDisplay() {
+            document.getElementById('timer-display').textContent = formatTime(state.secondsElapsed);
+        }
+
+        function showScreen(screenId) {
+            ['screen-start', 'screen-quiz', 'screen-results'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render Current Question
+        function renderQuestion() {
+            const q = state.activeQuestions[state.currentIndex];
+            const total = state.activeQuestions.length;
+            const userChoice = state.userAnswers[q.id];
+            const isAnswered = userChoice !== undefined;
+
+            // Update Progress
+            document.getElementById('progress-label').textContent = `ප්‍රශ්නය ${state.currentIndex + 1} / ${total}`;
+            const pct = ((state.currentIndex + 1) / total) * 100;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+
+            // Live Score
+            const currentScore = calculateScore();
+            document.getElementById('score-live-label').textContent = `ලකුණු: ${currentScore}`;
+
+            // Badges & Question Title
+            document.getElementById('q-category-badge').textContent = q.categoryName;
+            document.getElementById('q-orig-num').textContent = `ප්‍රශ්න අංකය: #${String(q.id).padStart(2, '0')}`;
+            document.getElementById('question-text').textContent = `${state.currentIndex + 1}. ${q.question}`;
+
+            // Render Options
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const labels = ['(1)', '(2)', '(3)', '(4)'];
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.disabled = isAnswered;
+
+                let baseClass = "w-full text-left p-4 rounded-xl border-2 transition-all flex items-center justify-between gap-3 ";
+                let badgeClass = "w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 ";
+                let statusIcon = "";
+
+                if (!isAnswered) {
+                    baseClass += "border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 bg-white cursor-pointer";
+                    badgeClass += "bg-slate-100 text-slate-700";
+                } else {
+                    if (idx === q.correct) {
+                        baseClass += "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold";
+                        badgeClass += "bg-emerald-600 text-white";
+                        statusIcon = `<svg class="w-6 h-6 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>`;
+                    } else if (idx === userChoice && userChoice !== q.correct) {
+                        baseClass += "border-rose-500 bg-rose-50 text-rose-950";
+                        badgeClass += "bg-rose-600 text-white";
+                        statusIcon = `<svg class="w-6 h-6 text-rose-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                    } else {
+                        baseClass += "border-slate-100 bg-slate-50/60 text-slate-400 opacity-75";
+                        badgeClass += "bg-slate-200/70 text-slate-400";
+                    }
+                }
+
+                btn.className = baseClass;
+                btn.innerHTML = `
+                    <div class="flex items-center gap-3.5">
+                        <span class="${badgeClass}">${labels[idx]}</span>
+                        <span class="text-sm sm:text-base leading-snug">${optText}</span>
+                    </div>
+                    ${statusIcon}
+                `;
+
+                if (!isAnswered) {
+                    btn.onclick = () => selectOption(idx);
+                }
+
+                optionsContainer.appendChild(btn);
+            });
+
+            // Feedback Box
+            const feedbackBox = document.getElementById('feedback-box');
+            if (isAnswered) {
+                const isCorrect = userChoice === q.correct;
+                feedbackBox.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-rose-50', 'border-rose-200');
+                
+                if (isCorrect) {
+                    feedbackBox.classList.add('bg-emerald-50', 'border-emerald-200');
+                    document.getElementById('feedback-icon').innerHTML = `<span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">✓</span>`;
+                    document.getElementById('feedback-title').textContent = "නිවැරදි පිළිතුරකි!";
+                    document.getElementById('feedback-title').className = "font-bold mb-1 text-emerald-800";
+                } else {
+                    feedbackBox.classList.add('bg-rose-50', 'border-rose-200');
+                    document.getElementById('feedback-icon').innerHTML = `<span class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-xs font-bold">✕</span>`;
+                    document.getElementById('feedback-title').textContent = `වැරදි පිළිතුරකි! නිවැරදි පිළිතුර ${labels[q.correct]} වේ.`;
+                    document.getElementById('feedback-title').className = "font-bold mb-1 text-rose-800";
+                }
+                document.getElementById('feedback-explanation').textContent = q.explanation;
+            } else {
+                feedbackBox.classList.add('hidden');
+            }
+
+            // Navigation Buttons State
+            document.getElementById('btn-prev').disabled = state.currentIndex === 0;
+            const nextBtnText = document.getElementById('btn-next-text');
+            if (state.currentIndex === total - 1) {
+                nextBtnText.textContent = "අවසන් කරන්න";
+            } else {
+                nextBtnText.textContent = "ඊළඟ ප්‍රශ්නය";
+            }
+
+            updateNavigatorHighlight();
+        }
+
+        function selectOption(optionIndex) {
+            const q = state.activeQuestions[state.currentIndex];
+            if (state.userAnswers[q.id] !== undefined) return;
+
+            state.userAnswers[q.id] = optionIndex;
+            renderQuestion();
+            renderNavigator();
+        }
+
+        function prevQuestion() {
+            if (state.currentIndex > 0) {
+                state.currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (state.currentIndex < state.activeQuestions.length - 1) {
+                state.currentIndex++;
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function jumpToQuestion(index) {
+            state.currentIndex = index;
+            renderQuestion();
+        }
+
+        // Question Navigator Grid
+        function renderNavigator() {
+            const grid = document.getElementById('navigator-grid');
+            grid.innerHTML = '';
+
+            const answeredCount = Object.keys(state.userAnswers).length;
+            document.getElementById('answered-count-badge').textContent = `${answeredCount} / ${state.activeQuestions.length}`;
+
+            state.activeQuestions.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = idx + 1;
+                btn.onclick = () => jumpToQuestion(idx);
+
+                const ans = state.userAnswers[q.id];
+                let cls = "h-9 rounded-lg font-bold text-xs transition flex items-center justify-center border ";
+
+                if (ans === undefined) {
+                    cls += "bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200";
+                } else if (ans === q.correct) {
+                    cls += "bg-emerald-500 text-white border-emerald-600";
+                } else {
+                    cls += "bg-rose-500 text-white border-rose-600";
+                }
+
+                if (idx === state.currentIndex) {
+                    cls += " ring-2 ring-blue-600 ring-offset-1";
+                }
+
+                btn.className = cls;
+                grid.appendChild(btn);
+            });
+        }
+
+        function updateNavigatorHighlight() {
+            const buttons = document.getElementById('navigator-grid').children;
+            Array.from(buttons).forEach((btn, idx) => {
+                if (idx === state.currentIndex) {
+                    btn.classList.add('ring-2', 'ring-blue-600', 'ring-offset-1');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-blue-600', 'ring-offset-1');
+                }
+            });
+        }
+
+        function calculateScore() {
+            let score = 0;
+            state.activeQuestions.forEach(q => {
+                if (state.userAnswers[q.id] === q.correct) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        // Finish Quiz & Show Results
+        function finishQuiz() {
+            clearInterval(state.timerInterval);
+
+            const total = state.activeQuestions.length;
+            const correctCount = calculateScore();
+            const wrongOrSkipped = total - correctCount;
+            const percentage = Math.round((correctCount / total) * 100);
+
+            document.getElementById('stat-score').textContent = `${correctCount} / ${total}`;
+            document.getElementById('stat-percent').textContent = `${percentage}%`;
+            document.getElementById('stat-correct').textContent = correctCount;
+            document.getElementById('stat-wrong').textContent = wrongOrSkipped;
+
+            // Title & Encouragement based on score
+            const titleEl = document.getElementById('result-title');
+            const subEl = document.getElementById('result-subtitle');
+            if (percentage >= 80) {
+                titleEl.textContent = "අති විශිෂ්ටයි! (Excellent)";
+                subEl.textContent = "ඔබට සාමාන්‍ය දැනුම හා කාලීන තොරතුරු පිළිබඳ ඉතා ඉහළ අවබෝධයක් ඇත.";
+            } else if (percentage >= 60) {
+                titleEl.textContent = "ඉතා හොඳයි! (Very Good)";
+                subEl.textContent = "ඔබ හොඳ ප්‍රතිඵලයක් ලබාගෙන ඇත. වැරදුණු ප්‍රශ්න පහතින් නැවත අධ්‍යයනය කරන්න.";
+            } else if (percentage >= 40) {
+                titleEl.textContent = "සාමාන්‍ය මට්ටමකි (Good Effort)";
+                subEl.textContent = "තවදුරටත් කාලීන තොරතුරු අධ්‍යයනය කිරීමෙන් ඔබට ඉහළ ලකුණු කරා යා හැකිය.";
+            } else {
+                titleEl.textContent = "තවදුරටත් පුහුණු වන්න (Keep Practicing)";
+                subEl.textContent = "පහත දැක්වෙන නිවැරදි පිළිතුරු විවරණය කියවා නැවත ප්‍රශ්නාවලියට මුහුණ දෙන්න.";
+            }
+
+            // Time taken
+            const timeWrap = document.getElementById('stat-time-wrapper');
+            if (state.useTimer) {
+                timeWrap.classList.remove('hidden');
+                document.getElementById('stat-time').textContent = formatTime(state.secondsElapsed);
+            } else {
+                timeWrap.classList.add('hidden');
+            }
+
+            renderCategoryBreakdown();
+            renderReviewList('all');
+            showScreen('screen-results');
+        }
+
+        function renderCategoryBreakdown() {
+            const container = document.getElementById('category-breakdown');
+            container.innerHTML = '';
+
+            const cats = [
+                { id: 1, title: "1 කොටස: ආර්ථිකය හා භූගෝලය" },
+                { id: 2, title: "2 කොටස: කාලීන සිදුවීම්" },
+                { id: 3, title: "3 කොටස: විද්‍යා හා සංඛ්‍යා දත්ත" }
+            ];
+
+            cats.forEach(c => {
+                const catQs = state.activeQuestions.filter(q => q.category === c.id);
+                if (catQs.length === 0) return;
+
+                const catCorrect = catQs.filter(q => state.userAnswers[q.id] === q.correct).length;
+                const catPct = Math.round((catCorrect / catQs.length) * 100);
+
+                const card = document.createElement('div');
+                card.className = "p-4 rounded-xl bg-slate-50 border border-slate-200";
+                card.innerHTML = `
+                    <div class="text-xs font-bold text-slate-600 mb-1">${c.title}</div>
+                    <div class="flex items-end justify-between">
+                        <span class="text-xl font-extrabold text-slate-900">${catCorrect} / ${catQs.length}</span>
+                        <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800">${catPct}%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div class="bg-blue-600 h-full rounded-full" style="width: ${catPct}%"></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterReview(mode) {
+            document.querySelectorAll('.rev-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            const activeBtn = document.getElementById(`rev-filter-${mode}`);
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            activeBtn.classList.add('bg-slate-800', 'text-white');
+
+            renderReviewList(mode);
+        }
+
+        function renderReviewList(mode) {
+            const list = document.getElementById('review-list');
+            list.innerHTML = '';
+            const labels = ['(1)', '(2)', '(3)', '(4)'];
+
+            let items = state.activeQuestions;
+            if (mode === 'wrong') {
+                items = items.filter(q => state.userAnswers[q.id] !== q.correct);
+            }
+
+            if (items.length === 0) {
+                list.innerHTML = `<div class="text-center py-8 text-slate-500 text-sm">පෙන්වීමට වැරදි පිළිතුරු නොමැත. සියල්ල නිවැරදියි! 🎉</div>`;
+                return;
+            }
+
+            items.forEach(q => {
+                const userAns = state.userAnswers[q.id];
+                const isCorrect = userAns === q.correct;
+                const isSkipped = userAns === undefined;
+
+                let statusBadge = '';
+                let borderClass = '';
+                if (isCorrect) {
+                    statusBadge = `<span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800">නිවැරදියි</span>`;
+                    borderClass = 'border-emerald-200 bg-emerald-50/20';
+                } else if (isSkipped) {
+                    statusBadge = `<span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-800">පිළිතුරු දී නැත</span>`;
+                    borderClass = 'border-amber-200 bg-amber-50/20';
+                } else {
+                    statusBadge = `<span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-rose-100 text-rose-800">වැරදියි</span>`;
+                    borderClass = 'border-rose-200 bg-rose-50/20';
+                }
+
+                const card = document.createElement('div');
+                card.className = `p-4 sm:p-5 rounded-xl border ${borderClass}`;
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold text-slate-400">ප්‍රශ්න අංක #${String(q.id).padStart(2, '0')}</span>
+                        ${statusBadge}
+                    </div>
+                    <div class="font-bold text-slate-900 text-sm sm:text-base mb-3">${q.question}</div>
+                    <div class="space-y-1.5 text-xs sm:text-sm mb-3">
+                        ${!isSkipped ? `
+                            <div class="${isCorrect ? 'text-emerald-700 font-semibold' : 'text-rose-700 font-semibold'}">
+                                ඔබේ පිළිතුර: ${labels[userAns]} ${q.options[userAns]}
+                            </div>
+                        ` : ''}
+                        ${!isCorrect ? `
+                            <div class="text-emerald-700 font-bold">
+                                නිවැරදි පිළිතුර: ${labels[q.correct]} ${q.options[q.correct]}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-200/80">
+                        <strong>විවරණය:</strong> ${q.explanation}
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function restartSameQuiz() {
+            startQuiz();
+        }
+
+        function goHome() {
+            clearInterval(state.timerInterval);
+            document.getElementById('header-timer').classList.add('hidden');
+            document.getElementById('header-timer').classList.remove('flex');
+            document.getElementById('btn-home-top').classList.add('hidden');
+            showScreen('screen-start');
+        }
+
+        // Custom Modal Logic
+        function confirmReturnHome() {
+            if (!document.getElementById('screen-quiz').classList.contains('hidden')) {
+                document.getElementById('modal-title').textContent = "මුල් පිටුවට යාමට තහවුරු කරන්න";
+                document.getElementById('modal-message').textContent = "ඔබ දැනට සිදු කරමින් පවතින ප්‍රශ්නාවලියේ ප්‍රගතිය මැකී යනු ඇත. ඔබට මුල් පිටුවට යාමට අවශ්‍යද?";
+                document.getElementById('modal-confirm-btn').onclick = () => {
+                    closeModal();
+                    goHome();
+                };
+                document.getElementById('custom-modal').classList.remove('hidden');
+            } else {
+                goHome();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
